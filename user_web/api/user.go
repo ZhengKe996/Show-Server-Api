@@ -115,6 +115,10 @@ func PassWordLogin(ctx *gin.Context) {
 		HandleValidatorError(ctx, err)
 		return
 	}
+	if !store.Verify(passwordLoginForm.CaptchaId, passwordLoginForm.Captcha, true) {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "验证码错误❎"})
+		return
+	}
 	// 拨号连接用户 GRPC 服务
 	userConn, err := grpc.Dial(fmt.Sprintf("%s:%d", global.ServerConfig.UserSrvInfo.Host, global.ServerConfig.UserSrvInfo.Port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
