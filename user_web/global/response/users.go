@@ -1,4 +1,4 @@
-package reponse
+package response
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ func (j JsonTime) MarshalJSON() ([]byte, error) {
 
 type UserResponse struct {
 	ID       int32    `json:"id"`
-	NikeName string   `json:"name"`
+	NikeName string   `json:"nike_name"`
 	Mobile   string   `json:"mobile"`
 	Birthday JsonTime `json:"birthday"`
 	Gender   string   `json:"gender"`

@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin/binding"
+	ut "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 	"server_api/user_web/global"
 	"server_api/user_web/initialize"
+	myvalidator "server_api/user_web/validator"
 )
 
 func main() {
@@ -16,6 +20,21 @@ func main() {
 
 	// 初始化 router
 	r := initialize.Routers()
+
+	// 初始化 trans
+	_ = initialize.InitTrans("zh")
+
+	// 注册验证器
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		_ = v.RegisterValidation("mobile", myvalidator.ValidateMobile)
+		// 验证器错误翻译
+		_ = v.RegisterTranslation("mobile", global.Trans, func(ut ut.Translator) error {
+			return ut.Add("mobile", "{0} 非法的手机号码!", true) // see universal-translator for details
+		}, func(ut ut.Translator, fe validator.FieldError) string {
+			t, _ := ut.T("mobile", fe.Field())
+			return t
+		})
+	}
 
 	zap.S().Debugf("启动服务器,端口:%d", global.ServerConfig.Port)
 	if err := r.Run(fmt.Sprintf(":%d", global.ServerConfig.Port)); err != nil {

@@ -3,3 +3,6 @@ port: 8021
 user-srv:
   host: '127.0.0.1'
   port: 50051
+
+jwt:
+  key: 'J0AYzAf~FATJW5#&' # 随机生成
