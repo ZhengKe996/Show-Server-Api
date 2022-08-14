@@ -21,9 +21,10 @@ func main() {
 	// 初始化 router
 	r := initialize.Routers()
 
-	// 初始化 trans
+	// 初始化 翻译器
 	_ = initialize.InitTrans("zh")
-
+	// 初始化 Srv连接
+	initialize.InitSrvConn()
 	// 注册验证器
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		_ = v.RegisterValidation("mobile", myvalidator.ValidateMobile)
