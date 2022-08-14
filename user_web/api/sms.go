@@ -7,7 +7,6 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/dysmsapi"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"go.uber.org/zap"
 	"math/rand"
 	"net/http"
 	"server_api/user_web/forms"
@@ -36,9 +35,7 @@ func SendSms(ctx *gin.Context) {
 		return
 	}
 	smsCode := GenerateSmsCode(6)
-	zap.S().Infof("短信验证码: %s", smsCode)
 	// 使用云服务的短信验证码接口...
-
 	client, err := dysmsapi.NewClientWithAccessKey("cn-hangzhou", global.ServerConfig.AliSmsInfo.ApiKey, global.ServerConfig.AliSmsInfo.ApiSecrect)
 	if err != nil {
 		panic(err)
