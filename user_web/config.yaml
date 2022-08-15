@@ -1,16 +1,7 @@
-name: 'user-web'
-port: 8021
-user-srv:
-  host: '127.0.0.1'
-  port: 50051
-
-jwt:
-  key: 'J0AYzAf~FATJW5#&' # 随机生成
-sms:
-  key: ''
-  secrect: ''
-
-redis:
-  host: '127.0.0.1'
-  port: 6379
-  expire: 300
+host: '192.168.0.162'
+port: 8848
+namespace: '06b2e648-5c87-4f02-9529-b044fa3628eb'
+user: 'nacos'
+password: 'nacos'
+dataid: 'user-web.json'
+group: 'dev'
