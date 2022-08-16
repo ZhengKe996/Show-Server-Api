@@ -30,7 +30,7 @@ func HandleGrpcError2Http(err error, c *gin.Context) {
 			case codes.InvalidArgument:
 				c.JSON(http.StatusBadRequest, gin.H{"message": "参数错误❎"})
 			case codes.Unavailable:
-				c.JSON(http.StatusInternalServerError, gin.H{"message": "用户服务不可用❎"})
+				c.JSON(http.StatusInternalServerError, gin.H{"message": "商品服务不可用❎"})
 			default:
 				c.JSON(http.StatusInternalServerError, gin.H{"message": "其他错误❎"})
 			}
